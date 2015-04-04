@@ -1172,4 +1172,8 @@ config TOUCHSCREEN_HIMAX_HX852xES
 
 source "drivers/input/touchscreen/hx852xes/Kconfig"
 
+config STATE_NOTIFIER
+        bool "State Notifier"
+	default y
+
 endif

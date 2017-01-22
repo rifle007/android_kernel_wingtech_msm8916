@@ -51,6 +51,15 @@ char g_lcm_id[128];
 #define MIN_REFRESH_RATE 48
 #define DEFAULT_MDP_TRANSFER_TIME 14000
 
+#ifdef CONFIG_MACH_T86519A1
+#define TPS65132_GPIO_POS_EN 902
+#define TPS65132_GPIO_NEG_EN 903
+#endif
+
+DEFINE_LED_TRIGGER(bl_led_trigger);
+
+extern void lazyplug_enter_lazy(bool enter);
+
 bool display_on = true;
 
 bool is_display_on()
@@ -675,6 +684,9 @@ static int mdss_dsi_panel_on(struct mdss_panel_data *pdata)
 	set_power_suspend_state_panel_hook(POWER_SUSPEND_INACTIVE);
 #endif
 
+	display_on = true;
+	lazyplug_enter_lazy(false); 
+
 	pinfo = &pdata->panel_info;
 	ctrl = container_of(pdata, struct mdss_dsi_ctrl_pdata,
 				panel_data);
@@ -760,9 +772,9 @@ static int mdss_dsi_panel_off(struct mdss_panel_data *pdata)
 	if (ctrl->off_cmds.cmd_cnt)
 		mdss_dsi_panel_cmds_send(ctrl, &ctrl->off_cmds);
 
-#ifdef CONFIG_POWERSUSPEND
-	set_power_suspend_state_panel_hook(POWER_SUSPEND_ACTIVE);
-#endif
+	display_on = false;
+	lazyplug_enter_lazy(true);
+
 
 end:
 	pinfo->blank_state = MDSS_PANEL_BLANK_BLANK;

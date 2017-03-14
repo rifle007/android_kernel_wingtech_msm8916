@@ -53,7 +53,7 @@
  * lowering the frequency towards the ideal frequency is faster than below it.
  */
 
-#define GOV_IDLE_FREQ 533333
+#define GOV_IDLE_FREQ 400000
 
 #define DEFAULT_SUSPEND_IDEAL_FREQ GOV_IDLE_FREQ
 static unsigned int suspend_ideal_freq;

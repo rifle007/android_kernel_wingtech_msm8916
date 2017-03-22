@@ -48,6 +48,9 @@ dump_boot;
 # begin ramdisk changes
 
 replace_line init.qcom.power.rc "write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq" "    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 400000";
+replace_line init.qcom.power.rc "write /sys/devices/system/cpu/cpufreq/interactive/target_loads" 'write /sys/devices/system/cpu/cpufreq/interactive/target_loads "1 400000:85 800000:90 998400:95"';
+
+replace_line init.qcom.power.rc "setprop sys.io.scheduler" '    setprop sys.io.scheduler "zen"';
 
 #change minfreq buildprop
 sed -i '/ro.min_freq_0/d' /system/build.prop

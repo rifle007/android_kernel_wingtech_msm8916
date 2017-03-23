@@ -1,4 +1,4 @@
 export ARCH=arm
 export SUBARCH=arm
-make zetsubou_defconfig
-cp .config arch/arm/configs/zetsubou_defconfig
+make wt88047_defconfig
+cp .config arch/arm/configs/wt88047_defconfig

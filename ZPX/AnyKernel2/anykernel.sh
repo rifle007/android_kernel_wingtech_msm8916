@@ -36,6 +36,7 @@ cp -rpf $patch/cron.d /system/etc
 cp -rpf $patch/thermal-engine.conf /system/etc/thermal-engine.conf
 chmod -R 644 /system/etc/thermal-engine.conf
 chmod -R 755 /system/etc/init.d
+rm /system/etc/init.d/99zpx_zram
 chmod -R 755 /system/etc/cron.d
 #mv /system/bin/vm_bms /system/bin/vm_bms.bak
 #chmod 644 $ramdisk/sbin/media_profiles.xml
@@ -56,6 +57,8 @@ replace_line init.qcom.power.rc "setprop sys.io.scheduler" '    setprop sys.io.s
 sed -i '/ro.min_freq_0/d' /system/build.prop
 sed -i '/^$/d' /system/build.prop
 echo "ro.min_freq_0=400000" >> /system/build.prop
+
+replace_line fstab.qcom "dev/block/zram0" "/dev/block/zram0                             none         swap    defaults zramsize=1073741824,zramstreams=3";
 
 ## init.rc
 #backup_file init.rc;

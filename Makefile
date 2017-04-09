@@ -356,7 +356,7 @@ CC		= $(srctree)/scripts/gcc-wrapper.py $(REAL_CC)
 CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 		  -Wbitwise -Wno-return-void $(CF)
 MODFLAGS	= -DMODULE
-COMMON_OPT_FLAGS	= -march=armv7-a -mtune=cortex-a53 -fmodulo-sched -fmodulo-sched-allow-regmoves \
+COMMON_OPT_FLAGS	= -march=armv8-a+crc+crypto+fp+simd -mtune=cortex-a53 -fmodulo-sched -fmodulo-sched-allow-regmoves \
                      -pipe
 GRAPHITE = -fgraphite -fgraphite-identity -floop-parallelize-all \
            -ftree-loop-linear -floop-interchange \
